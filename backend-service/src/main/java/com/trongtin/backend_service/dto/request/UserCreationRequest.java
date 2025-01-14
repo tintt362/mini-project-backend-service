@@ -2,7 +2,9 @@ package com.trongtin.backend_service.dto.request;
 
 import com.trongtin.backend_service.common.Gender;
 import com.trongtin.backend_service.common.UserType;
+import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
@@ -11,6 +13,8 @@ import java.util.List;
 
 @Getter
 @ToString
+@Setter
+@Data
 public class UserCreationRequest implements Serializable {
     private String firstName;
     private String lastName;

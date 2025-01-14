@@ -1,15 +1,14 @@
 package com.trongtin.backend_service.dto.request;
 
 import com.trongtin.backend_service.common.Gender;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Data;
+
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-@Getter
-@ToString
+@Data
 public class UserUpdateRequest implements Serializable {
     private Long id;
     private String firstName;

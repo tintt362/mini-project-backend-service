@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public long save(UserCreationRequest req) {
-        log.info("Saving user: {}", req);
+       // log.info("Saving user: {}", req);
         UserEntity user = new UserEntity();
         user.setFirstName(req.getFirstName());
         user.setLastName(req.getLastName());
