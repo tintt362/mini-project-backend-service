@@ -1,6 +1,7 @@
 package com.trongtin.backend_service.controller;
 
 import com.trongtin.backend_service.dto.request.UserCreationRequest;
+import com.trongtin.backend_service.dto.request.UserPasswordRequest;
 import com.trongtin.backend_service.dto.request.UserUpdateRequest;
 import com.trongtin.backend_service.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -51,4 +52,20 @@ public class UserController {
 
         return result;
     }
+
+    @Operation(summary = "Change Password", description = "API change password for user to database")
+    @PatchMapping("/change-pwd")
+    public Map<String, Object> changePassword(@RequestBody UserPasswordRequest request) {
+       // log.info("Changing password for user: {}", request);
+
+        userService.changePassword(request);
+
+        Map<String, Object> result = new LinkedHashMap<>();
+        result.put("status", HttpStatus.NO_CONTENT.value());
+        result.put("message", "Password updated successfully");
+        result.put("data", "");
+
+        return result;
+    }
+
 }
