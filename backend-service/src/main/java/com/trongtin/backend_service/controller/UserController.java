@@ -3,6 +3,7 @@ package com.trongtin.backend_service.controller;
 import com.trongtin.backend_service.dto.request.UserCreationRequest;
 import com.trongtin.backend_service.dto.request.UserPasswordRequest;
 import com.trongtin.backend_service.dto.request.UserUpdateRequest;
+import com.trongtin.backend_service.dto.response.UserResponse;
 import com.trongtin.backend_service.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,6 +26,21 @@ public class UserController {
     @Autowired
     private  UserService userService;
 
+    @Operation(summary = "Get user list", description = "API retrieve user from database")
+    @GetMapping("/list")
+    public Map<String, Object> getList(@RequestParam(required = false) String keyword,
+                                       @RequestParam(required = false) String sort,
+                                       @RequestParam(defaultValue = "0") int page,
+                                       @RequestParam(defaultValue = "20") int size) {
+        log.info("Get user list");
+
+        Map<String, Object> result = new LinkedHashMap<>();
+        result.put("status", HttpStatus.OK.value());
+        result.put("message", "user list");
+        result.put("data", userService.findAll(keyword, sort, page, size));
+
+        return result;
+    }
     @Operation(summary = "Create User", description = "API add new user to database")
     @PostMapping("/add")
     public ResponseEntity<Object> createUser(@RequestBody UserCreationRequest request) {
@@ -36,6 +52,20 @@ public class UserController {
         result.put("data", userService.save(request));
 
         return new ResponseEntity<>(result, HttpStatus.CREATED);
+    }
+    @Operation(summary = "Get user detail", description = "API retrieve user detail by ID from database")
+    @GetMapping("/{userId}")
+    public Map<String, Object> getUserDetail(@PathVariable Long userId) {
+        log.info("Get user detail by ID: {}", userId);
+
+        UserResponse userDetail = userService.findById(userId);
+
+        Map<String, Object> result = new LinkedHashMap<>();
+        result.put("status", HttpStatus.OK.value());
+        result.put("message", "user");
+        result.put("data", userDetail);
+
+        return result;
     }
 
     @Operation(summary = "Update User", description = "API update user to database")
