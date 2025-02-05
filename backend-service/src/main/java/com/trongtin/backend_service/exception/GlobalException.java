@@ -1,8 +1,7 @@
 package com.trongtin.backend_service.exception;
 
 
-import org.springframework.web.bind.annotation.RestControllerAdvice;
-
+import com.trongtin.backend_service.dto.response.ErrorResponse;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -22,7 +21,7 @@ import java.util.Date;
 import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@RestControllerAdvice
+@RestControllerAdvice(basePackages = "com.trongtin.backend_service.controller")
 public class GlobalException {
 
     /**
@@ -190,13 +189,5 @@ public class GlobalException {
         return errorResponse;
     }
 
-    @Getter
-    @Setter
-    private class ErrorResponse {
-        private Date timestamp;
-        private int status;
-        private String path;
-        private String error;
-        private String message;
-    }
+
 }

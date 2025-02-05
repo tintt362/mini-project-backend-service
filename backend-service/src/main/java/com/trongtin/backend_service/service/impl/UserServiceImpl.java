@@ -6,6 +6,7 @@ import com.trongtin.backend_service.dto.request.UserPasswordRequest;
 import com.trongtin.backend_service.dto.request.UserUpdateRequest;
 import com.trongtin.backend_service.dto.response.UserPageResponse;
 import com.trongtin.backend_service.dto.response.UserResponse;
+import com.trongtin.backend_service.exception.InvalidDataException;
 import com.trongtin.backend_service.exception.ResourceNotFoundException;
 import com.trongtin.backend_service.model.AddressEntity;
 import com.trongtin.backend_service.model.UserEntity;
@@ -109,6 +110,11 @@ public class UserServiceImpl implements UserService {
     @Transactional(rollbackFor = Exception.class)
     public long save(UserCreationRequest req) {
        // log.info("Saving user: {}", req);
+        UserEntity userByEmail = userRepository.findByEmail(req.getEmail());
+        if (userByEmail != null) {
+            throw new InvalidDataException("Email already exists");
+        }
+
         UserEntity user = new UserEntity();
         user.setFirstName(req.getFirstName());
         user.setLastName(req.getLastName());

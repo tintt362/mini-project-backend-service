@@ -34,7 +34,7 @@ public class UserController {
                                        @RequestParam(required = false) String sort,
                                        @RequestParam(defaultValue = "0") int page,
                                        @RequestParam(defaultValue = "20") int size) {
-        log.info("Get user list");
+        //log.info("Get user list");
 
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("status", HttpStatus.OK.value());
@@ -58,7 +58,7 @@ public class UserController {
     @Operation(summary = "Get user detail", description = "API retrieve user detail by ID from database")
     @GetMapping("/{userId}")
     public Map<String, Object> getUserDetail(@PathVariable @Min(value = 1, message = "userId must be equals or greater than 1") Long userId) {
-        log.info("Get user detail by ID: {}", userId);
+       // log.info("Get user detail by ID: {}", userId);
 
         UserResponse userDetail = userService.findById(userId);
 
