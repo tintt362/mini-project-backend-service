@@ -25,7 +25,7 @@ public class AuthenticationController {
     }
 
     @Operation(summary = "Refresh token", description = "Get access token by refresh token")
-    @PostMapping("/refresh-token")
+    @PostMapping("/ -token")
     public TokenResponse refreshToken(@RequestBody String refreshToken) {
         log.info("Refresh token request");
         return TokenResponse.builder().accessToken("DUMMY-NEW-ACCESS-TOKEN").refreshToken("DUMMY-REFRESH-TOKEN").build();
