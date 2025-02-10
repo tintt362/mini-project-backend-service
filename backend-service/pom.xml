@@ -183,7 +183,21 @@
 				</configuration>
 			</plugin>
 
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.3.1</version>
+				<configuration>
+					<from>
+						<image>openjdk:21-alpine</image> <!-- Use Java 21 base image -->
+					</from>
+					<to>
+						<image>thaitrongtin/${project.artifactId}:20241213</image>
 
+					</to>
+
+				</configuration>
+			</plugin>
 
 		</plugins>
 		<finalName>backend-service</finalName>
